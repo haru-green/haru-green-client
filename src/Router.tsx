@@ -9,13 +9,8 @@ import Root from './Root';
 const Router = createBrowserRouter([
   {
     path: '/',
-
-    element: <Root />,
+    element: <Home />,
     children: [
-      {
-        path: '/home',
-        element: <Home />,
-      },
       {
         path: '/login',
         element: <Login />,
