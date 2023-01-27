@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 
 import CharacterFrame from '@/features/Home/CharacterFrame';
+import ModalContents from '@/features/Home/ModalContents';
 import StartQuizButton from '@/features/Home/StartQuizButton';
 import Modal from '@/shared/Modal';
 
@@ -32,7 +33,13 @@ const Home = () => {
           튜토리얼 보러가기
         </button>
       </main>
-      {isModalOpen && <Modal closeModal={closeModal} />}
+      {isModalOpen && (
+        <Modal
+          closeModal={closeModal}
+          title="튜토리얼"
+          content={<ModalContents />}
+        />
+      )}
     </>
   );
 };
