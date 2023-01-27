@@ -7,13 +7,13 @@ import styles from './Modal.module.scss';
 const cx = classNames.bind(styles);
 
 type ModalProps = {
-  closeModal: () => void;
+  closeModal: (e: any) => void;
 };
 
 const Modal = ({ closeModal }: ModalProps) => {
   return (
     <div onClick={closeModal} className={cx('modalOverlay')}>
-      <div className={cx('modal')}>
+      <div onClick={(e) => e.stopPropagation()} className={cx('modal')}>
         <button onClick={closeModal} className={cx('closeButton')}>
           <img alt="close" src={CloseIcon} />
         </button>
