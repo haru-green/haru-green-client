@@ -33,7 +33,7 @@ const Home = () => {
   const navigateToQuiz = () => {
     navigate('/quiz/1');
   };
-  
+
   return (
     <>
       <main className={cx('main')}>
