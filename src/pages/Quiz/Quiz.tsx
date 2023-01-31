@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import QuizImage from '@/assets/images/quiz-1.png';
 import Button from '@/features/Quiz/Button';
@@ -10,6 +11,8 @@ import styles from './Quiz.module.scss';
 const cx = classNames.bind(styles);
 
 const Quiz = () => {
+  const { quizId } = useParams();
+
   const [isCorrectBtnClicked, setIsCorrectBtnClicked] = useState(false);
   const [isWrongBtnClicked, setIsWrongBtnClicked] = useState(false);
 
