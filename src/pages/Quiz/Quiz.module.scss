@@ -1,0 +1,40 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 10% 0 5% 0;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.quiz {
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.direction {
+  font-size: 10px;
+  line-height: 24px;
+  color: #a0a0a0;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 114px;
+  margin-top: 30px;
+}
+
+.nav {
+  position: absolute;
+  bottom: 10%;
+}
