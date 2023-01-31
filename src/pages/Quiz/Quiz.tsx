@@ -11,7 +11,7 @@ import styles from './Quiz.module.scss';
 const cx = classNames.bind(styles);
 
 const Quiz = () => {
-  const { quizId } = useParams();
+  const { id } = useParams();
 
   const [isCorrectBtnClicked, setIsCorrectBtnClicked] = useState(false);
   const [isWrongBtnClicked, setIsWrongBtnClicked] = useState(false);
@@ -25,6 +25,8 @@ const Quiz = () => {
     setIsCorrectBtnClicked(false);
     setIsWrongBtnClicked(true);
   };
+
+  const nextQuizId = String(Number(id) + 1);
 
   return (
     <>
@@ -50,7 +52,7 @@ const Quiz = () => {
           />
         </div>
         <nav className={cx('nav')}>
-          <NavigateButton text="다음" />
+          <NavigateButton text="다음" destination={`/quiz/${nextQuizId}`} />
         </nav>
       </div>
     </>
