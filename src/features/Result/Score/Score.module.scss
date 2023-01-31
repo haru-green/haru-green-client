@@ -1,0 +1,40 @@
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  &.one {
+    background-color: rgba(0, 0, 0, 0.2)
+  }
+  &.two {
+    background-color: rgba(241, 82, 82, 0.2);
+  }
+  &.three {
+    background-color: rgba(255, 199, 0, 0.2);
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 14px 34px;
+  color: #ffffff;
+  font-size: 50px;
+  &.one {
+    background-color: #000000;
+  }
+  &.two {
+    background-color: #f15252;
+  }
+  &.three {
+    background-color: #ffc700;
+  }
+}
