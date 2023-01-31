@@ -1,19 +1,20 @@
 import classNames from 'classnames/bind';
 
-import styles from './StartQuizButton.module.scss';
+import styles from './OutlinedButton.module.scss';
 
 const cx = classNames.bind(styles);
 
 type StartQuizButtonProps = {
+  text: string;
   onClick: () => void;
 };
 
-const StartQuizButton = ({ onClick }: StartQuizButtonProps) => {
+const OutlinedButton = ({ text, onClick }: StartQuizButtonProps) => {
   return (
     <button onClick={onClick} className={cx('wrapper')}>
-      오늘의 퀴즈 풀러가기
+      {text}
     </button>
   );
 };
 
-export default StartQuizButton;
+export default OutlinedButton;
