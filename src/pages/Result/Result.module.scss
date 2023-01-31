@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 100px 0 60px 0;
+}
+
+.result {
+  font-size: 22px;
+}
+
+.score {
+  font-size: 36px;
+  color: #34aa70;
+  margin-bottom: 30px;
+}
