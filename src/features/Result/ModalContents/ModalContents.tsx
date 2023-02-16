@@ -29,8 +29,8 @@ const ModalContents = () => {
           <div key={idx} className={cx('box')}>
             <h3 className={cx('number')}>문제 {idx + 1}</h3>
             <div className={cx('answer')}>
-              <p>{sampleAnswer.title}</p>
-              <p>{sampleAnswer.content}</p>
+              <p className={cx('title')}>{sampleAnswer.title}</p>
+              <p className={cx('description')}>{sampleAnswer.content}</p>
             </div>
           </div>
         );
