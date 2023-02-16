@@ -24,7 +24,7 @@ const Result = () => {
         <div className={cx('result')}>
           <p>두부님은 총</p>
           <p className={cx('score')}>
-            <span>0문제</span>
+            <span className={cx('count')}>0문제</span>
             <span> 맞췄어요</span>
           </p>
           <OutlinedButton text="정답 보러가기" onClick={openModal} />
