@@ -1,9 +1,10 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import QuizImage from '@/assets/images/quiz-1.png';
 import Button from '@/features/Quiz/Button';
+import ProgressBar from '@/features/Quiz/ProgressBar';
 import NavigateButton from '@/shared/NavigateButton';
 
 import styles from './Quiz.module.scss';
@@ -26,10 +27,22 @@ const Quiz = () => {
     setIsWrongBtnClicked(true);
   };
 
-  const nextQuizId = String(Number(id) + 1);
+  const getNextDestination = () => {
+    const nextId = Number(id) + 1;
+    if (nextId > 3) {
+      return '/result';
+    }
+    return `/quiz/${nextId}`;
+  };
+
+  useEffect(() => {
+    setIsCorrectBtnClicked(false);
+    setIsWrongBtnClicked(false);
+  }, [id]);
 
   return (
     <>
+      <ProgressBar progress={Number(id)} />
       <div className={cx('wrapper')}>
         <img alt="quiz-image" src={QuizImage} />
         <div className={cx('contents')}>
@@ -52,7 +65,11 @@ const Quiz = () => {
           />
         </div>
         <nav className={cx('nav')}>
-          <NavigateButton text="다음" destination={`/quiz/${nextQuizId}`} />
+          <NavigateButton
+            text="다음"
+            destination={getNextDestination()}
+            disabled={!isCorrectBtnClicked && !isWrongBtnClicked}
+          />
         </nav>
       </div>
     </>
