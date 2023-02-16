@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import CharacterFrame from '@/features/Home/CharacterFrame';
 import ModalContents from '@/features/Home/ModalContents';
-import StartQuizButton from '@/features/Home/StartQuizButton';
 import Modal from '@/shared/Modal';
+import OutlinedButton from '@/shared/OutlinedButton';
 
 import styles from './Home.module.scss';
 
@@ -49,7 +49,7 @@ const Home = () => {
             imgSrc={require(`@/assets/images/characters/character-${userLevel}.png`)}
           />
         </div>
-        <StartQuizButton onClick={navigateToQuiz} />
+        <OutlinedButton text="오늘의 퀴즈 풀러가기" onClick={navigateToQuiz} />
         <button onClick={openModal} className={cx('tutorial')}>
           튜토리얼 보러가기
         </button>

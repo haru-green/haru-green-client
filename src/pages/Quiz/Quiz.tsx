@@ -1,9 +1,10 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import QuizImage from '@/assets/images/quiz-1.png';
 import Button from '@/features/Quiz/Button';
+import ProgressBar from '@/features/Quiz/ProgressBar';
 import NavigateButton from '@/shared/NavigateButton';
 
 import styles from './Quiz.module.scss';
@@ -11,7 +12,7 @@ import styles from './Quiz.module.scss';
 const cx = classNames.bind(styles);
 
 const Quiz = () => {
-  const { quizId } = useParams();
+  const { id } = useParams();
 
   const [isCorrectBtnClicked, setIsCorrectBtnClicked] = useState(false);
   const [isWrongBtnClicked, setIsWrongBtnClicked] = useState(false);
@@ -26,8 +27,22 @@ const Quiz = () => {
     setIsWrongBtnClicked(true);
   };
 
+  const getNextDestination = () => {
+    const nextId = Number(id) + 1;
+    if (nextId > 3) {
+      return '/result';
+    }
+    return `/quiz/${nextId}`;
+  };
+
+  useEffect(() => {
+    setIsCorrectBtnClicked(false);
+    setIsWrongBtnClicked(false);
+  }, [id]);
+
   return (
     <>
+      <ProgressBar progress={Number(id)} />
       <div className={cx('wrapper')}>
         <img alt="quiz-image" src={QuizImage} />
         <div className={cx('contents')}>
@@ -50,7 +65,11 @@ const Quiz = () => {
           />
         </div>
         <nav className={cx('nav')}>
-          <NavigateButton text="다음" />
+          <NavigateButton
+            text="다음"
+            destination={getNextDestination()}
+            disabled={!isCorrectBtnClicked && !isWrongBtnClicked}
+          />
         </nav>
       </div>
     </>
