@@ -8,17 +8,20 @@ const cx = classNames.bind(styles);
 type NavigateButtonProps = {
   text: string;
   destination: string;
+  sideEffect?: () => void;
   disabled?: boolean;
 };
 
 const NavigateButton = ({
   text,
   destination,
+  sideEffect,
   disabled,
 }: NavigateButtonProps) => {
   const navigate = useNavigate();
 
   const navigateTo = () => {
+    if (sideEffect) sideEffect();
     navigate(destination);
   };
 
