@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 
 import axios from '@/api/axios';
+import loginWithAuthCode from '@/api/loginWithAuthCode';
 import { Logo } from '@/assets/icons';
 import KaKaoLogin from '@/assets/images/kakaoLogin.png';
 
@@ -14,13 +15,8 @@ const kakaoLogin = () => {
 
 const Login = () => {
   const kakaoAuthCode = new URLSearchParams(window.location.search).get('code');
-  if (kakaoAuthCode) {
-    axios.get(`/user/login?code=${kakaoAuthCode}`).then((res) => {
-      document.cookie = `auth_grant=${res.headers['x-auth-grant']}`;
-      document.cookie = `auth_token=${res.headers['x-auth-token']}`;
-      document.cookie = `auth_refresh=${res.headers['x-auth-refresh']}`;
-    });
-  }
+  if (kakaoAuthCode) loginWithAuthCode(kakaoAuthCode);
+
   return (
     <main className={cx('main')}>
       <div className={cx('content')}>
