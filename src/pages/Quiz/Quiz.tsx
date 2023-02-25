@@ -1,14 +1,11 @@
 import classNames from 'classnames/bind';
-
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import QuizImage from '@/assets/images/quiz-1.png';
 import Button from '@/features/Quiz/Button';
 import ProgressBar from '@/features/Quiz/ProgressBar';
-
 import { QuizContext } from '@/index';
-
 import NavigateButton from '@/shared/NavigateButton';
 
 import styles from './Quiz.module.scss';
@@ -44,12 +41,11 @@ const Quiz = () => {
   }, [id]);
 
   const destination = useMemo(() => getNextDestination(), [getNextDestination]);
-  };
 
   useEffect(() => {
     setIsCorrectBtnClicked(false);
     setIsWrongBtnClicked(false);
-  }, [id]);
+  }, []);
 
   return (
     <>
