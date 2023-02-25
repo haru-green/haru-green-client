@@ -1,10 +1,11 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import QuizImage from '@/assets/images/quiz-1.png';
 import Button from '@/features/Quiz/Button';
 import ProgressBar from '@/features/Quiz/ProgressBar';
+import { QuizContext } from '@/index';
 import NavigateButton from '@/shared/NavigateButton';
 
 import styles from './Quiz.module.scss';
@@ -13,7 +14,7 @@ const cx = classNames.bind(styles);
 
 const Quiz = () => {
   const { id } = useParams();
-
+  const quizContext = useContext(QuizContext);
   const [isCorrectBtnClicked, setIsCorrectBtnClicked] = useState(false);
   const [isWrongBtnClicked, setIsWrongBtnClicked] = useState(false);
 
@@ -27,13 +28,19 @@ const Quiz = () => {
     setIsWrongBtnClicked(true);
   };
 
-  const getNextDestination = () => {
+  const markQuizAnswer = () => {
+    quizContext.push(isCorrectBtnClicked);
+  };
+
+  const getNextDestination = useCallback(() => {
     const nextId = Number(id) + 1;
     if (nextId > 3) {
       return '/result';
     }
     return `/quiz/${nextId}`;
-  };
+  }, [id]);
+
+  const destination = useMemo(() => getNextDestination(), [getNextDestination]);
 
   useEffect(() => {
     setIsCorrectBtnClicked(false);
@@ -67,7 +74,8 @@ const Quiz = () => {
         <nav className={cx('nav')}>
           <NavigateButton
             text="다음"
-            destination={getNextDestination()}
+            destination={destination}
+            sideEffect={markQuizAnswer}
             disabled={!isCorrectBtnClicked && !isWrongBtnClicked}
           />
         </nav>
