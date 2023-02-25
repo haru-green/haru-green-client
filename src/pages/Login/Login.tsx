@@ -15,11 +15,10 @@ const kakaoLogin = () => {
 const Login = () => {
   const kakaoAuthCode = new URLSearchParams(window.location.search).get('code');
   if (kakaoAuthCode) {
-    console.log(kakaoAuthCode);
     axios.get(`/user/login?code=${kakaoAuthCode}`).then((res) => {
-      console.log(res);
-      const jwtToken = res.headers;
-      console.log(jwtToken);
+      document.cookie = `auth_grant=${res.headers['x-auth-grant']}`;
+      document.cookie = `auth_token=${res.headers['x-auth-token']}`;
+      document.cookie = `auth_refresh=${res.headers['x-auth-refresh']}`;
     });
   }
   return (
