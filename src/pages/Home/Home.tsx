@@ -8,6 +8,7 @@ import ModalContents from '@/features/Home/ModalContents';
 import Modal from '@/shared/Modal';
 import OutlinedButton from '@/shared/OutlinedButton';
 import { IUser } from '@/type';
+import { wasSolvedToday } from '@/util';
 
 import styles from './Home.module.scss';
 
@@ -60,7 +61,11 @@ const Home = () => {
             }.png`)}
           />
         </div>
-        <OutlinedButton text="오늘의 퀴즈 풀러가기" onClick={navigateToQuiz} />
+        <OutlinedButton
+          text="오늘의 퀴즈 풀러가기"
+          onClick={navigateToQuiz}
+          disabled={wasSolvedToday('2')}
+        />
         <button onClick={openModal} className={cx('tutorial')}>
           튜토리얼 보러가기
         </button>
