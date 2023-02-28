@@ -1,6 +1,14 @@
-export interface User {
-  name: string;
+export interface IUser {
+  nickname: string;
   level: number;
   email: string;
   refreshToken: string;
+}
+
+export interface IQuiz {
+  title: string;
+  commentary: string;
+  ox: boolean;
+  level: number;
+  num: number;
 }
