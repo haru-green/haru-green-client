@@ -7,6 +7,7 @@ import CharacterFrame from '@/features/Home/CharacterFrame';
 import ModalContents from '@/features/Home/ModalContents';
 import Modal from '@/shared/Modal';
 import OutlinedButton from '@/shared/OutlinedButton';
+import { IUser } from '@/type';
 
 import styles from './Home.module.scss';
 
@@ -23,27 +24,18 @@ const characters = [
   '환경 마스터 숲',
 ];
 
-type UserType = {
-  nickname: string;
-  level: number;
-  email: string;
-  refreshToke: string;
-};
-
 const Home = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<UserType | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
-  const navigateToQuiz = () => {
-    navigate('/quiz/1');
-  };
+  const navigateToQuiz = () => navigate('/quiz/1');
 
   const fetchUser = async () => {
-    const user = await getUser<UserType>();
+    const user = await getUser<IUser>();
+    sessionStorage.setItem('user', JSON.stringify(user));
     setUser(user);
   };
 

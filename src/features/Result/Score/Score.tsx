@@ -6,14 +6,14 @@ const cx = classNames.bind(styles);
 
 const scoreToNumber = (score: string) => {
   switch (score) {
+    case 'zero':
+      return 0;
     case 'one':
       return 1;
     case 'two':
       return 2;
     case 'three':
       return 3;
-    default:
-      return 0;
   }
 };
 

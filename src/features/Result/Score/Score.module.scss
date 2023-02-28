@@ -6,14 +6,17 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  &.one {
+  &.zero {
     background-color: rgba(0, 0, 0, 0.2)
   }
-  &.two {
+  &.one {
     background-color: rgba(241, 82, 82, 0.2);
   }
-  &.three {
+  &.two {
     background-color: rgba(255, 199, 0, 0.2);
+  }
+  &.three {
+    background-color: rgba(52, 170, 112, 0.2);
   }
 }
 
@@ -28,13 +31,16 @@
   padding: 14px 34px;
   color: #ffffff;
   font-size: 50px;
-  &.one {
+  &.zero {
     background-color: #000000;
   }
-  &.two {
+  &.one {
     background-color: #f15252;
   }
-  &.three {
+  &.two {
     background-color: #ffc700;
+  }
+  &.three {
+    background-color: #34aa70;
   }
 }

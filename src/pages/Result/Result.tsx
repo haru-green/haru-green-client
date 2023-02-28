@@ -1,30 +1,70 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
+import getQuizAnswer from '@/api/getQuizAnswer';
+import postAnswer from '@/api/postAnswer';
+import { answerState } from '@/atom';
 import ModalContents from '@/features/Result/ModalContents';
 import Score from '@/features/Result/Score';
 import Modal from '@/shared/Modal';
 import NavigateButton from '@/shared/NavigateButton';
 import OutlinedButton from '@/shared/OutlinedButton';
+import { IQuiz } from '@/type';
 
 import styles from './Result.module.scss';
 
 const cx = classNames.bind(styles);
 
 const Result = () => {
+  const user = JSON.parse(sessionStorage.getItem('user') as string);
+
+  const userAnswer = useRecoilValue(answerState);
+
+  const [score, setScore] = useState(0);
   const [isAnswerModalOpen, setIsAnswerModalOpen] = useState<boolean>(false);
+  const [quizAnswer, setQuizAnswer] = useState<IQuiz[]>([]);
 
   const openModal = () => setIsAnswerModalOpen(true);
   const closeModal = () => setIsAnswerModalOpen(false);
 
+  const scoring = useCallback(
+    (userAnswer: boolean[], quizAnswer: IQuiz[]) => {
+      let score = 0;
+      userAnswer.forEach((answer, index) => {
+        if (answer === quizAnswer[index].ox) score += 1;
+      });
+      setScore(score);
+    },
+    [score]
+  );
+
+  const matchScoreToString = useCallback(() => {
+    if (score === 1) return 'one';
+    if (score === 2) return 'two';
+    if (score === 3) return 'three';
+    return 'zero';
+  }, [score]);
+
+  const fetchQuizAnswer = async (email: string | undefined) => {
+    const quizAnswer = await getQuizAnswer(email);
+    scoring(userAnswer, quizAnswer);
+    setQuizAnswer(quizAnswer);
+  };
+
+  useEffect(() => {
+    postAnswer(user?.email, userAnswer);
+    fetchQuizAnswer(user?.email);
+  }, []);
+
   return (
     <>
       <div className={cx('wrapper')}>
-        <Score score="three" />
+        <Score score={matchScoreToString()} />
         <div className={cx('result')}>
-          <p>두부님은 총</p>
+          <p>{user?.nickname}님은 총</p>
           <p className={cx('score')}>
-            <span className={cx('count')}>0문제</span>
+            <span className={cx('count')}>{score}문제</span>
             <span> 맞췄어요</span>
           </p>
           <OutlinedButton text="정답 보러가기" onClick={openModal} />
@@ -35,7 +75,7 @@ const Result = () => {
         <Modal
           closeModal={closeModal}
           title="정답"
-          content={<ModalContents />}
+          content={<ModalContents quizAnswer={quizAnswer} />}
         />
       )}
     </>
