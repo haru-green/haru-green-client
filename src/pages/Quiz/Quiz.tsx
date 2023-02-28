@@ -1,20 +1,29 @@
 import classNames from 'classnames/bind';
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 
+import getQuiz from '@/api/getQuiz';
 import QuizImage from '@/assets/images/quiz-1.png';
+import { answerState } from '@/atom';
 import Button from '@/features/Quiz/Button';
 import ProgressBar from '@/features/Quiz/ProgressBar';
-import { QuizContext } from '@/index';
 import NavigateButton from '@/shared/NavigateButton';
+import { IQuiz } from '@/type';
+import { getSessionUser, parseQuiz } from '@/util';
 
 import styles from './Quiz.module.scss';
 
 const cx = classNames.bind(styles);
 
 const Quiz = () => {
-  const { id } = useParams();
-  const quizContext = useContext(QuizContext);
+  const { id } = useParams<string>();
+
+  const user = getSessionUser();
+
+  const [answer, setAnswer] = useRecoilState(answerState);
+
+  const [quiz, setQuiz] = useState<IQuiz | null>(null);
   const [isCorrectBtnClicked, setIsCorrectBtnClicked] = useState(false);
   const [isWrongBtnClicked, setIsWrongBtnClicked] = useState(false);
 
@@ -29,7 +38,7 @@ const Quiz = () => {
   };
 
   const markQuizAnswer = () => {
-    quizContext.push(isCorrectBtnClicked);
+    setAnswer([...answer, isCorrectBtnClicked]);
   };
 
   const getNextDestination = useCallback(() => {
@@ -42,10 +51,20 @@ const Quiz = () => {
 
   const destination = useMemo(() => getNextDestination(), [getNextDestination]);
 
+  const fetchQuiz = async () => {
+    const quiz = await getQuiz<IQuiz[]>(user?.email);
+    if (quiz) setQuiz(quiz[Number(id) - 1]);
+  };
+
   useEffect(() => {
+    if (id === '1') setAnswer([]);
     setIsCorrectBtnClicked(false);
     setIsWrongBtnClicked(false);
-  }, []);
+  }, [id]);
+
+  useEffect(() => {
+    fetchQuiz();
+  }, [id]);
 
   return (
     <>
@@ -53,10 +72,7 @@ const Quiz = () => {
       <div className={cx('wrapper')}>
         <img alt="quiz-image" src={QuizImage} />
         <div className={cx('contents')}>
-          <p className={cx('quiz')}>
-            일회용 종이컵이나 플라스틱컵 <br />
-            대부분 재활용이 된다
-          </p>
+          <p className={cx('quiz')}>{parseQuiz(quiz?.title)}</p>
           <p className={cx('direction')}>선택 후 다음을 눌러주세요</p>
         </div>
         <div className={cx('buttonWrapper')}>
