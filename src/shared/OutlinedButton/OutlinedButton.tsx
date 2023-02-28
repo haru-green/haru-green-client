@@ -11,7 +11,7 @@ type StartQuizButtonProps = {
 
 const OutlinedButton = ({ text, onClick }: StartQuizButtonProps) => {
   return (
-    <button onClick={onClick} className={cx('wrapper')}>
+    <button type="button" onClick={onClick} className={cx('wrapper')}>
       {text}
     </button>
   );
