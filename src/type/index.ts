@@ -7,6 +7,7 @@ export interface IUser {
 }
 
 export interface IQuiz {
+  id: number;
   title: string;
   commentary: string;
   ox: boolean;
