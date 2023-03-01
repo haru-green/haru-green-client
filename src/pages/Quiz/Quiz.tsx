@@ -50,6 +50,10 @@ const Quiz = () => {
 
   const destination = useMemo(() => getNextDestination(), [getNextDestination]);
 
+  const imageSrc = useMemo(() => {
+    if (quiz?.level && id) return quiz?.level * Number(id);
+  }, [id]);
+
   const fetchQuiz = async () => {
     const quiz = await getQuiz<IQuiz[]>(user?.email);
     if (quiz) setQuiz(quiz[Number(id) - 1]);
@@ -71,7 +75,7 @@ const Quiz = () => {
       <div className={cx('wrapper')}>
         <img
           alt="quiz-image"
-          src={require(`@/assets/images/quiz/quiz-${quiz?.id}`)}
+          src={require(`@/assets/images/quiz/quiz-${imageSrc}.png`)}
         />
         <div className={cx('contents')}>
           <p className={cx('quiz')}>{parseQuiz(quiz?.title)}</p>
