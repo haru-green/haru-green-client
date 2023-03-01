@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import loginWithAuthCode from '@/api/loginWithAuthCode';
-import { Logo } from '@/assets/icons';
-import KaKaoLogin from '@/assets/images/kakaoLogin.png';
+import { Kakao, Logo } from '@/assets/icons';
 import { isLogin } from '@/util';
 
 import styles from './Login.module.scss';
@@ -27,8 +26,14 @@ const Login = () => {
     <main className={cx('main')}>
       <div className={cx('content')}>
         <Logo />
-        <button type="button" aria-label="kakao" onClick={kakaoLogin}>
-          <img alt="kakao" src={KaKaoLogin} />
+        <button
+          className={cx('button')}
+          type="button"
+          aria-label="kakao"
+          onClick={kakaoLogin}
+        >
+          <Kakao style={{ position: 'absolute', left: '30px', width: 24 }} />
+          <span>카카오 로그인</span>
         </button>
       </div>
     </main>
