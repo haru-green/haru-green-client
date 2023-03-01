@@ -28,8 +28,7 @@ const characters = [
 
 const Home = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(sessionStorage.getItem('user') as string) as IUser;
-  // const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -47,7 +46,7 @@ const Home = () => {
   const fetchUser = async () => {
     const user = await getUser<IUser>();
     sessionStorage.setItem('user', JSON.stringify(user));
-    // setUser(user);
+    setUser(user);
   };
 
   useEffect(() => {
@@ -61,7 +60,6 @@ const Home = () => {
       <main className={cx('main')}>
         <div className={cx('back')}>
           <div className={cx('title')}>
-            {user?.nickname}
             <p className={cx('nickname')}>
               {isLoading ? '하루그린' : user?.nickname}님<span> 반가워요</span>
             </p>
