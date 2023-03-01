@@ -61,6 +61,7 @@ const Home = () => {
       <main className={cx('main')}>
         <div className={cx('back')}>
           <div className={cx('title')}>
+            user?.nickname
             <p className={cx('nickname')}>
               {isLoading ? '하루그린' : user?.nickname}님<span> 반가워요</span>
             </p>
