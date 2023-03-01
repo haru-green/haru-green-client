@@ -45,7 +45,6 @@ const Home = () => {
 
   const fetchUser = async () => {
     const user = await getUser<IUser>();
-    console.log(user);
     sessionStorage.setItem('user', JSON.stringify(user));
     setUser(user);
   };
