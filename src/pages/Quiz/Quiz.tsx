@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import getQuiz from '@/api/getQuiz';
-import QuizImage from '@/assets/images/quiz-1.png';
 import { answerState } from '@/atom';
 import Button from '@/features/Quiz/Button';
 import ProgressBar from '@/features/Quiz/ProgressBar';
@@ -70,7 +69,10 @@ const Quiz = () => {
     <>
       <ProgressBar progress={Number(id)} />
       <div className={cx('wrapper')}>
-        <img alt="quiz-image" src={QuizImage} />
+        <img
+          alt="quiz-image"
+          src={require(`@/assets/images/quiz/quiz-${quiz?.id}`)}
+        />
         <div className={cx('contents')}>
           <p className={cx('quiz')}>{parseQuiz(quiz?.title)}</p>
           <p className={cx('direction')}>선택 후 다음을 눌러주세요</p>
