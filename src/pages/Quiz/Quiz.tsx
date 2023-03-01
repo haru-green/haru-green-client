@@ -23,6 +23,7 @@ const Quiz = () => {
   const [answer, setAnswer] = useRecoilState(answerState);
 
   const [quiz, setQuiz] = useState<IQuiz | null>(null);
+  const [image, setImage] = useState<string | null>(null);
   const [isCorrectBtnClicked, setIsCorrectBtnClicked] = useState(false);
   const [isWrongBtnClicked, setIsWrongBtnClicked] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -51,13 +52,12 @@ const Quiz = () => {
 
   const destination = useMemo(() => getNextDestination(), [getNextDestination]);
 
-  const imageSrc = useMemo(() => {
-    if (quiz?.level && id) return quiz?.level * Number(id);
-  }, [id]);
-
   const fetchQuiz = async () => {
     const quiz = await getQuiz<IQuiz[]>(user?.email);
     if (quiz) setQuiz(quiz[Number(id) - 1]);
+    if (id && quiz) {
+      setImage(String(Number(id) * quiz[0]?.level));
+    }
     setIsLoading(false);
   };
 
@@ -77,7 +77,9 @@ const Quiz = () => {
       <div className={cx('wrapper')}>
         <img
           alt="quiz-image"
-          src={isLoading ? '' : require(`@/assets/images/quiz/quiz-1.png`)}
+          src={
+            isLoading ? '' : require(`@/assets/images/quiz/quiz-${image}.png`)
+          }
         />
         <div className={cx('contents')}>
           <p className={cx('quiz')}>{parseQuiz(quiz?.title)}</p>
