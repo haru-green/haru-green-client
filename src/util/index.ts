@@ -30,7 +30,7 @@ export const getToken = () => {
  * 해당 레벨의 퀴즈 풀이에 성공했을 때, 성공한 시점의 다음 날부터 다음 레벨의 퀴즈에 도전할 수 있다.
  * 가장 최근에 퀴즈 풀이에 성공한 날짜를 확인하여 그 날짜가 오늘 날짜가 아니라면 true 아니면 false 를 리턴한다.
  * */
-export const wasSolvedToday = (lastSolvedDate: string) => {
+export const wasSolvedToday = (lastSolvedDate: string | undefined) => {
   const now = new Date();
   const todayDate = String(now.getDate());
   return todayDate !== lastSolvedDate;
