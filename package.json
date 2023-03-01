@@ -2,6 +2,7 @@
   "name": "haru-green-client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/login",
   "scripts": {
     "start": "craco start",
     "build": "craco build"
