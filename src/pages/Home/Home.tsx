@@ -51,6 +51,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    if (!document.cookie.includes('auth_token')) location.href = '/login';
     fetchUser();
   }, []);
 
