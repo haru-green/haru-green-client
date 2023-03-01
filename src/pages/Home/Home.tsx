@@ -62,7 +62,7 @@ const Home = () => {
             <p>오늘도 환경에 한 발짝 더 가까워져요</p>
           </div>
           <CharacterFrame
-            character={characters[user?.level || 1 - 1]}
+            character={characters[user?.level ? user?.level - 1 : 0]}
             imgSrc={require(`@/assets/images/characters/character-${
               user?.level || 1
             }.png`)}
