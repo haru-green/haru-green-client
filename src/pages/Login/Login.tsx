@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import loginWithAuthCode from '@/api/loginWithAuthCode';
 import { Logo } from '@/assets/icons';
 import KaKaoLogin from '@/assets/images/kakaoLogin.png';
+import { isLogin } from '@/util';
 
 import styles from './Login.module.scss';
 
@@ -19,9 +20,7 @@ const Login = () => {
   if (kakaoAuthCode) loginWithAuthCode(kakaoAuthCode);
 
   useEffect(() => {
-    if (document.cookie.includes('auth_token')) {
-      navigate('/');
-    }
+    if (isLogin()) navigate('/');
   }, []);
 
   return (

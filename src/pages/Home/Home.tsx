@@ -9,7 +9,7 @@ import ModalContents from '@/features/Home/ModalContents';
 import Modal from '@/shared/Modal';
 import OutlinedButton from '@/shared/OutlinedButton';
 import { IUser } from '@/type';
-import { wasSolvedToday } from '@/util';
+import { isLogin, wasSolvedToday } from '@/util';
 
 import styles from './Home.module.scss';
 
@@ -50,7 +50,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (!document.cookie.includes('auth_token')) navigate('/login');
+    if (!isLogin()) navigate('/login');
     fetchUser();
     setIsLoading(false);
   }, []);
