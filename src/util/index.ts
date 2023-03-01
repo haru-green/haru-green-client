@@ -31,6 +31,7 @@ export const getToken = () => {
  * 가장 최근에 퀴즈 풀이에 성공한 날짜를 확인하여 그 날짜가 오늘 날짜가 아니라면 true 아니면 false 를 리턴한다.
  * */
 export const wasSolvedToday = (lastSolvedDate: string | undefined) => {
+  if (!lastSolvedDate) return false;
   const now = new Date();
   const todayDate = String(now.getDate());
   return todayDate !== lastSolvedDate;
