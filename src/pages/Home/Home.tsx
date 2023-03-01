@@ -47,12 +47,12 @@ const Home = () => {
     const user = await getUser<IUser>();
     sessionStorage.setItem('user', JSON.stringify(user));
     setUser(user);
-    setIsLoading(false);
   };
 
   useEffect(() => {
     if (!document.cookie.includes('auth_token')) navigate('/login');
     fetchUser();
+    setIsLoading(false);
   }, []);
 
   return (
