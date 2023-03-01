@@ -28,7 +28,8 @@ const characters = [
 
 const Home = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<IUser | null>(null);
+  const user = JSON.parse(sessionStorage.getItem('user') as string) as IUser;
+  // const [user, setUser] = useState<IUser | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -46,7 +47,7 @@ const Home = () => {
   const fetchUser = async () => {
     const user = await getUser<IUser>();
     sessionStorage.setItem('user', JSON.stringify(user));
-    setUser(user);
+    // setUser(user);
   };
 
   useEffect(() => {
