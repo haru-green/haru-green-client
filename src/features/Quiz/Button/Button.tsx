@@ -19,6 +19,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
+      type="button"
       onClick={onClick}
       className={cx(
         'button',
