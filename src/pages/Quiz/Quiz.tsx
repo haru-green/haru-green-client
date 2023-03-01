@@ -25,6 +25,7 @@ const Quiz = () => {
   const [quiz, setQuiz] = useState<IQuiz | null>(null);
   const [isCorrectBtnClicked, setIsCorrectBtnClicked] = useState(false);
   const [isWrongBtnClicked, setIsWrongBtnClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const onCorrectBtnClick = () => {
     setIsCorrectBtnClicked(true);
@@ -57,6 +58,7 @@ const Quiz = () => {
   const fetchQuiz = async () => {
     const quiz = await getQuiz<IQuiz[]>(user?.email);
     if (quiz) setQuiz(quiz[Number(id) - 1]);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -75,7 +77,11 @@ const Quiz = () => {
       <div className={cx('wrapper')}>
         <img
           alt="quiz-image"
-          src={require(`@/assets/images/quiz/quiz-${imageSrc}.png`)}
+          src={
+            isLoading
+              ? ''
+              : require(`@/assets/images/quiz/quiz-${imageSrc}.png`)
+          }
         />
         <div className={cx('contents')}>
           <p className={cx('quiz')}>{parseQuiz(quiz?.title)}</p>
