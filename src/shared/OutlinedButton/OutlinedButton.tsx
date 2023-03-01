@@ -7,11 +7,17 @@ const cx = classNames.bind(styles);
 type StartQuizButtonProps = {
   text: string;
   onClick: () => void;
+  disabled?: boolean;
 };
 
-const OutlinedButton = ({ text, onClick }: StartQuizButtonProps) => {
+const OutlinedButton = ({ text, onClick, disabled }: StartQuizButtonProps) => {
   return (
-    <button onClick={onClick} className={cx('wrapper')}>
+    <button
+      type="button"
+      onClick={onClick}
+      className={cx('wrapper', disabled && 'disabled')}
+      disabled={disabled}
+    >
       {text}
     </button>
   );
