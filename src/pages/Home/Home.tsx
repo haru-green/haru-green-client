@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import getUser from '@/api/getUser';
@@ -34,6 +34,13 @@ const Home = () => {
   const closeModal = () => setIsModalOpen(false);
   const navigateToQuiz = () => navigate('/quiz/1');
 
+  const lastSolvedDate = useMemo(() => {
+    const answerTime = user?.answerTime;
+    const pattern = /\d{4}-\d{2}-(\d{2})/;
+    const match = answerTime?.match(pattern);
+    if (match) return match[1];
+  }, [user]);
+
   const fetchUser = async () => {
     const user = await getUser<IUser>();
     sessionStorage.setItem('user', JSON.stringify(user));
@@ -64,7 +71,7 @@ const Home = () => {
         <OutlinedButton
           text="오늘의 퀴즈 풀러가기"
           onClick={navigateToQuiz}
-          disabled={wasSolvedToday('2')}
+          disabled={wasSolvedToday(lastSolvedDate)}
         />
         <button onClick={openModal} className={cx('tutorial')}>
           튜토리얼 보러가기
