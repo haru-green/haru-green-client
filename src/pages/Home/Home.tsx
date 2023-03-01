@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import getUser from '@/api/getUser';
 import CharacterFrame from '@/features/Home/CharacterFrame';
+import CharacterFrameSkeleton from '@/features/Home/CharacterFrameSkeleton';
 import ModalContents from '@/features/Home/ModalContents';
 import Modal from '@/shared/Modal';
 import OutlinedButton from '@/shared/OutlinedButton';
@@ -29,6 +30,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<IUser | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -45,6 +47,7 @@ const Home = () => {
     const user = await getUser<IUser>();
     sessionStorage.setItem('user', JSON.stringify(user));
     setUser(user);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -57,16 +60,20 @@ const Home = () => {
         <div className={cx('back')}>
           <div className={cx('title')}>
             <p className={cx('nickname')}>
-              {user?.nickname}님<span> 반가워요</span>
+              {isLoading ? '하루그린' : user?.nickname}님<span> 반가워요</span>
             </p>
             <p>오늘도 환경에 한 발짝 더 가까워져요</p>
           </div>
-          <CharacterFrame
-            character={characters[user?.level ? user?.level - 1 : 0]}
-            imgSrc={require(`@/assets/images/characters/character-${
-              user?.level || 1
-            }.png`)}
-          />
+          {isLoading ? (
+            <CharacterFrameSkeleton />
+          ) : (
+            <CharacterFrame
+              character={characters[user?.level ? user?.level - 1 : 0]}
+              imgSrc={require(`@/assets/images/characters/character-${
+                user?.level || 1
+              }.png`)}
+            />
+          )}
         </div>
         <OutlinedButton
           text="오늘의 퀴즈 풀러가기"
