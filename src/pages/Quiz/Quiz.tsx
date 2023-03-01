@@ -77,11 +77,7 @@ const Quiz = () => {
       <div className={cx('wrapper')}>
         <img
           alt="quiz-image"
-          src={
-            isLoading
-              ? ''
-              : require(`@/assets/images/quiz/quiz-${imageSrc}.png`)
-          }
+          src={isLoading ? '' : require(`@/assets/images/quiz/quiz-1.png`)}
         />
         <div className={cx('contents')}>
           <p className={cx('quiz')}>{parseQuiz(quiz?.title)}</p>
