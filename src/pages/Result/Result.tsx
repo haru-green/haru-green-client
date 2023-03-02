@@ -35,22 +35,16 @@ const Result = () => {
       userAnswer.forEach((answer, index) => {
         if (answer === quizAnswer[index].ox) tempScore += 1;
       });
+      console.log(userAnswer, quizAnswer, 'scoring: ', tempScore);
       setScore(tempScore);
     },
-    [score]
+    [quizAnswer]
   );
-
-  const matchScoreToString = useCallback(() => {
-    if (score === 1) return 'one';
-    if (score === 2) return 'two';
-    if (score === 3) return 'three';
-    return 'zero';
-  }, [score]);
 
   const fetchQuizAnswer = async (email: string | undefined) => {
     const quizAnswer = await getQuizAnswer(email);
-    scoring(userAnswer, quizAnswer);
     setQuizAnswer(quizAnswer);
+    scoring(userAnswer, quizAnswer);
   };
 
   useEffect(() => {
@@ -65,7 +59,7 @@ const Result = () => {
   return (
     <>
       <div className={cx('wrapper')}>
-        <Score score={matchScoreToString()} />
+        <Score score={score} />
         <div className={cx('result')}>
           <p>{user?.nickname}님은 총</p>
           <p className={cx('score')}>
