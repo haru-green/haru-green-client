@@ -1,17 +1,16 @@
 import classNames from 'classnames/bind';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 
 import getQuizAnswer from '@/api/getQuizAnswer';
 import postAnswer from '@/api/postAnswer';
-import { answerState } from '@/atom';
 import ModalContents from '@/features/Result/ModalContents';
 import Score from '@/features/Result/Score';
 import Modal from '@/shared/Modal';
 import NavigateButton from '@/shared/NavigateButton';
 import OutlinedButton from '@/shared/OutlinedButton';
 import { IQuiz } from '@/type';
+import { getAnswer } from '@/util';
 
 import styles from './Result.module.scss';
 
@@ -21,7 +20,7 @@ const Result = () => {
   const user = JSON.parse(sessionStorage.getItem('user') as string);
 
   const navigate = useNavigate();
-  const userAnswer = useRecoilValue(answerState);
+  const userAnswer = getAnswer();
 
   const [score, setScore] = useState(0);
   const [isAnswerModalOpen, setIsAnswerModalOpen] = useState<boolean>(false);
