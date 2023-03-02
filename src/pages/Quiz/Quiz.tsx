@@ -23,8 +23,10 @@ const Quiz = () => {
   const [answer, setAnswer] = useRecoilState(answerState);
 
   const [quiz, setQuiz] = useState<IQuiz | null>(null);
+  const [image, setImage] = useState<string | null>(null);
   const [isCorrectBtnClicked, setIsCorrectBtnClicked] = useState(false);
   const [isWrongBtnClicked, setIsWrongBtnClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const onCorrectBtnClick = () => {
     setIsCorrectBtnClicked(true);
@@ -53,6 +55,10 @@ const Quiz = () => {
   const fetchQuiz = async () => {
     const quiz = await getQuiz<IQuiz[]>(user?.email);
     if (quiz) setQuiz(quiz[Number(id) - 1]);
+    if (id && quiz) {
+      setImage(String(Number(id) * quiz[0]?.level));
+    }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -71,7 +77,9 @@ const Quiz = () => {
       <div className={cx('wrapper')}>
         <img
           alt="quiz-image"
-          src={require(`@/assets/images/quiz/quiz-${quiz?.id}`)}
+          src={
+            isLoading ? '' : require(`@/assets/images/quiz/quiz-${image}.png`)
+          }
         />
         <div className={cx('contents')}>
           <p className={cx('quiz')}>{parseQuiz(quiz?.title)}</p>
