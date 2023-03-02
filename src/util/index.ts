@@ -40,3 +40,15 @@ export const isLogin = () => {
   if (localStorage.getItem('authToken')) return true;
   return false;
 };
+
+export const getAnswer = () => {
+  return JSON.parse(sessionStorage.getItem('answer') as string);
+};
+
+export const setAnswer = (answer: boolean) => {
+  sessionStorage.setItem('answer', JSON.stringify(answer));
+};
+
+export const initAnswer = () => {
+  sessionStorage.removeItem('answer');
+};

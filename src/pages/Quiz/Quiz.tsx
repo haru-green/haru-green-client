@@ -1,15 +1,13 @@
 import classNames from 'classnames/bind';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
 
 import getQuiz from '@/api/getQuiz';
-import { answerState } from '@/atom';
 import Button from '@/features/Quiz/Button';
 import ProgressBar from '@/features/Quiz/ProgressBar';
 import NavigateButton from '@/shared/NavigateButton';
 import { IQuiz } from '@/type';
-import { getSessionUser, parseQuiz } from '@/util';
+import { getAnswer, getSessionUser, initAnswer, parseQuiz } from '@/util';
 
 import styles from './Quiz.module.scss';
 
@@ -21,7 +19,7 @@ const Quiz = () => {
   const { id } = useParams<string>();
   const navigate = useNavigate();
 
-  const [answer, setAnswer] = useRecoilState(answerState);
+  const answer = getAnswer() || [];
 
   const [quiz, setQuiz] = useState<IQuiz | null>(null);
   const [image, setImage] = useState<string | null>(null);
@@ -40,7 +38,8 @@ const Quiz = () => {
   };
 
   const markQuizAnswer = () => {
-    setAnswer([...answer, isCorrectBtnClicked]);
+    const currentAnswer = [...answer, isCorrectBtnClicked];
+    sessionStorage.setItem('answer', JSON.stringify(currentAnswer));
   };
 
   const getNextDestination = useCallback(() => {
@@ -64,7 +63,7 @@ const Quiz = () => {
 
   useEffect(() => {
     if (Number(id) > 3) navigate('/');
-    if (id === '1') setAnswer([]);
+    if (id === '1') initAnswer();
     setIsCorrectBtnClicked(false);
     setIsWrongBtnClicked(false);
   }, [id]);
