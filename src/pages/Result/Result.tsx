@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import getQuizAnswer from '@/api/getQuizAnswer';
@@ -19,6 +20,7 @@ const cx = classNames.bind(styles);
 const Result = () => {
   const user = JSON.parse(sessionStorage.getItem('user') as string);
 
+  const navigate = useNavigate();
   const userAnswer = useRecoilValue(answerState);
 
   const [score, setScore] = useState(0);
@@ -56,6 +58,10 @@ const Result = () => {
     postAnswer(user?.email, userAnswer);
     fetchQuizAnswer(user?.email);
   }, []);
+
+  window.onpopstate = () => {
+    navigate('/');
+  };
 
   return (
     <>
