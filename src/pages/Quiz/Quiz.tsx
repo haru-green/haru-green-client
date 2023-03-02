@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import getQuiz from '@/api/getQuiz';
@@ -16,9 +16,10 @@ import styles from './Quiz.module.scss';
 const cx = classNames.bind(styles);
 
 const Quiz = () => {
-  const { id } = useParams<string>();
-
   const user = getSessionUser();
+
+  const { id } = useParams<string>();
+  const navigate = useNavigate();
 
   const [answer, setAnswer] = useRecoilState(answerState);
 
@@ -62,6 +63,7 @@ const Quiz = () => {
   };
 
   useEffect(() => {
+    if (Number(id) > 3) navigate('/');
     if (id === '1') setAnswer([]);
     setIsCorrectBtnClicked(false);
     setIsWrongBtnClicked(false);
