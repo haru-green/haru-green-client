@@ -22,7 +22,7 @@ instance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status) {
-      history.pushState('', '', '/');
+      location.href = '/login';
       return Promise.reject(error);
     }
   }
