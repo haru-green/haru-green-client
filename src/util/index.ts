@@ -19,11 +19,6 @@ export const getSessionUser = () => {
  * 임시 해결책으로 클라이언트는 이를 쿠키에 직접 저장하고 있다.
  * */
 export const getToken = () => {
-  // const splitedToken = document.cookie.split(';');
-  // const authToken = splitedToken[1].split('auth_token=')[1];
-  // const refreshToken = splitedToken[2].split('auth_refresh=')[1];
-  // const authGrant = splitedToken[0].split('auth_grant=')[1];
-  // return { authToken, refreshToken, authGrant };
   const authToken = localStorage.getItem('authToken');
   const refreshToken = localStorage.getItem('refreshToken');
   const authGrant = localStorage.getItem('authGrant');
