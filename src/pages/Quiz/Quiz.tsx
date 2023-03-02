@@ -54,10 +54,10 @@ const Quiz = () => {
   const destination = useMemo(() => getNextDestination(), [getNextDestination]);
 
   const fetchQuiz = async () => {
-    const quiz = await getQuiz<IQuiz[]>(user?.email);
-    if (quiz) setQuiz(quiz[Number(id) - 1]);
-    if (id && quiz) {
-      setImage(String(Number(id) * quiz[0]?.level));
+    const fetchedQuiz = await getQuiz<IQuiz[]>(user?.email);
+    if (fetchedQuiz) setQuiz(fetchedQuiz[Number(id) - 1]);
+    if (id && fetchedQuiz) {
+      setImage(String(3 * fetchedQuiz[0]?.level - (3 - Number(id))));
     }
     setIsLoading(false);
   };
@@ -72,6 +72,10 @@ const Quiz = () => {
   useEffect(() => {
     fetchQuiz();
   }, [id]);
+
+  window.onpopstate = () => {
+    navigate('/');
+  };
 
   return (
     <>
