@@ -22,6 +22,7 @@ instance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status) {
+      history.pushState('', '', '/');
       return Promise.reject(error);
     }
   }

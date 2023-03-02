@@ -47,6 +47,7 @@ const Home = () => {
     const user = await getUser<IUser>();
     sessionStorage.setItem('user', JSON.stringify(user));
     setUser(user);
+    setIsLoading(false);
   };
 
   useEffect(() => {
