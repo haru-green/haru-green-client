@@ -30,11 +30,11 @@ const Result = () => {
 
   const scoring = useCallback(
     (userAnswer: boolean[], quizAnswer: IQuiz[]) => {
-      let score = 0;
+      let tempScore = 0;
       userAnswer.forEach((answer, index) => {
-        if (answer === quizAnswer[index].ox) score += 1;
+        if (answer === quizAnswer[index].ox) tempScore += 1;
       });
-      setScore(score);
+      setScore(tempScore);
     },
     [score]
   );
