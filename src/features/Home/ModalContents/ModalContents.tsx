@@ -6,12 +6,12 @@ const cx = classNames.bind(styles);
 
 const tutorials = [
   {
-    first_line: '하루 1번만',
-    second_line: '퀴즈에 참여할 수 있어요',
+    first_line: '레벨은 하루에 한 번만',
+    second_line: '올릴 수 있어요',
   },
   {
     first_line: '퀴즈 3문제를 모두 맞춰야',
-    second_line: '등급이 올라가요',
+    second_line: '레벨이 올라가요',
   },
   {
     first_line: '환경 마스터 숲이 되면',
