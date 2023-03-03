@@ -39,6 +39,8 @@ const Home = () => {
   const fetchUser = async () => {
     const user = await getUser<IUser>();
     sessionStorage.setItem('user', JSON.stringify(user));
+    console.log(typeof user?.answerTime);
+    console.log(user?.answerTime);
     setUser(user);
     setIsLoading(false);
   };
@@ -73,7 +75,7 @@ const Home = () => {
         <OutlinedButton
           text="오늘의 퀴즈 풀러가기"
           onClick={navigateToQuiz}
-          disabled={user?.answerTime.getDate() === new Date().getDate()}
+          disabled={user?.answerTime?.getDate() === new Date().getDate()}
         />
         <button onClick={openModal} className={cx('tutorial')}>
           튜토리얼 보러가기
