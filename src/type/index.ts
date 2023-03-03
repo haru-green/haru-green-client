@@ -3,7 +3,7 @@ export interface IUser {
   level: number;
   email: string;
   refreshToken: string;
-  answerTime: string;
+  answerTime: Date;
 }
 
 export interface IQuiz {
