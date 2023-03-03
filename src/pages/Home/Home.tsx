@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import getUser from '@/api/getUser';
@@ -31,22 +31,18 @@ const Home = () => {
   const [user, setUser] = useState<IUser | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [lastSolvedDate, setLastSolvedDate] = useState<string>('');
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const navigateToQuiz = () => navigate('/quiz/1');
 
-  const lastSolvedDate = useMemo(() => {
+  const fetchUser = async () => {
+    const user = await getUser<IUser>();
     const answerTime = user?.answerTime;
     const pattern = /\d{4}-\d{2}-(\d{2})/;
     const match = answerTime?.match(pattern);
-    if (match) return match[1];
-  }, []);
-
-  console.log(lastSolvedDate, new Date().getDate());
-
-  const fetchUser = async () => {
-    const user = await getUser<IUser>();
+    if (match) setLastSolvedDate(match[1]);
     sessionStorage.setItem('user', JSON.stringify(user));
     setUser(user);
     setIsLoading(false);
