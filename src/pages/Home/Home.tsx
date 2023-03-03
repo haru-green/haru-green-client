@@ -75,7 +75,10 @@ const Home = () => {
         <OutlinedButton
           text="오늘의 퀴즈 풀러가기"
           onClick={navigateToQuiz}
-          disabled={user?.answerTime?.getDate() === new Date().getDate()}
+          disabled={
+            new Date(user?.answerTime as string).getDate() ===
+            new Date().getDate()
+          }
         />
         <button onClick={openModal} className={cx('tutorial')}>
           튜토리얼 보러가기
