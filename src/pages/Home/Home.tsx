@@ -31,7 +31,7 @@ const Home = () => {
   const [user, setUser] = useState<IUser | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [lastSolvedDate, setLastSolvedDate] = useState<string>('');
+  const [lastSolvedDate, setLastSolvedDate] = useState<number>();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -41,10 +41,7 @@ const Home = () => {
     const user = await getUser<IUser>();
     const answerTime = user?.answerTime;
     console.log('answerTime', answerTime);
-    // const pattern = /\d{4}-\d{2}-(\d{2})/;
-    // const match = answerTime?.match(pattern);
-    // console.log('match', match);
-    // if (match) setLastSolvedDate(match[1]);
+    setLastSolvedDate(answerTime?.getDate());
     console.log('lastSolvedDate', lastSolvedDate);
     console.log('now', new Date().getDate());
     sessionStorage.setItem('user', JSON.stringify(user));
