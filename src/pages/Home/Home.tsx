@@ -40,8 +40,10 @@ const Home = () => {
   const fetchUser = async () => {
     const user = await getUser<IUser>();
     const answerTime = user?.answerTime;
+    console.log('answerTime', answerTime);
     const pattern = /\d{4}-\d{2}-(\d{2})/;
     const match = answerTime?.match(pattern);
+    console.log('match', match);
     if (match) setLastSolvedDate(match[1]);
     console.log('lastSolvedDate', lastSolvedDate);
     console.log('now', new Date().getDate());
