@@ -33,8 +33,6 @@ export const wasSolvedToday = (lastSolvedDate: Date | undefined) => {
   if (!lastSolvedDate) return false;
   const now = new Date();
   const todayDate = now.getDate();
-  console.log('todayDate', todayDate);
-  console.log('lastSolvedDate', lastSolvedDate);
   return todayDate !== lastSolvedDate.getDate();
 };
 
