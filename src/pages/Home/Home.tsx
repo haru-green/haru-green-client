@@ -31,7 +31,6 @@ const Home = () => {
   const [user, setUser] = useState<IUser | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [lastSolvedDate, setLastSolvedDate] = useState<number>();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -39,11 +38,6 @@ const Home = () => {
 
   const fetchUser = async () => {
     const user = await getUser<IUser>();
-    const answerTime = user?.answerTime;
-    console.log('answerTime', answerTime);
-    setLastSolvedDate(answerTime?.getDate());
-    console.log('lastSolvedDate', lastSolvedDate);
-    console.log('now', new Date().getDate());
     sessionStorage.setItem('user', JSON.stringify(user));
     setUser(user);
     setIsLoading(false);
@@ -79,7 +73,7 @@ const Home = () => {
         <OutlinedButton
           text="오늘의 퀴즈 풀러가기"
           onClick={navigateToQuiz}
-          disabled={wasSolvedToday(lastSolvedDate)}
+          disabled={wasSolvedToday(user?.answerTime)}
         />
         <button onClick={openModal} className={cx('tutorial')}>
           튜토리얼 보러가기
