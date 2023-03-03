@@ -41,7 +41,9 @@ const Home = () => {
     const pattern = /\d{4}-\d{2}-(\d{2})/;
     const match = answerTime?.match(pattern);
     if (match) return match[1];
-  }, [user]);
+  }, []);
+
+  console.log(lastSolvedDate, new Date().getDate());
 
   const fetchUser = async () => {
     const user = await getUser<IUser>();
