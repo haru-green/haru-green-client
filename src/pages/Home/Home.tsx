@@ -9,7 +9,7 @@ import ModalContents from '@/features/Home/ModalContents';
 import Modal from '@/shared/Modal';
 import OutlinedButton from '@/shared/OutlinedButton';
 import { IUser } from '@/type';
-import { isLogin, wasSolvedToday } from '@/util';
+import { isLogin } from '@/util';
 
 import styles from './Home.module.scss';
 
