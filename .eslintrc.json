@@ -1,6 +1,7 @@
 {
   "extends": ["next/core-web-vitals", "@wonse/eslint-config"],
   "rules" : {
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "no-restricted-exports": "off"
   }
 }
