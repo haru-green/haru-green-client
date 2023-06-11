@@ -11,8 +11,8 @@
     "test-storybook": "test-storybook",
     "build-storybook": "storybook build",
     "scan:i18n": "i18next-scanner --config i18next-scanner.config.js",
-    "upload:i18n": "npm run scan:i18n && node translate/upload.js",
-    "download:i18n": "node translate/download.js",
+    "upload:i18n": "npm run scan:i18n && node src/translate/upload.js",
+    "download:i18n": "node src/translate/download.js",
     "serve": "npm run download:i18n && vue-cli-service serve"
   },
   "dependencies": {
@@ -22,6 +22,7 @@
     "classnames": "^2.3.2",
     "i18next": "^22.5.1",
     "next": "13.4.2",
+    "next-i18next": "^13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
