@@ -1,4 +1,4 @@
-function SignIn() {
+function SignIn({ params: { lng } }) {
   return <main>signin</main>;
 }
 
