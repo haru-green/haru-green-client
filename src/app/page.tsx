@@ -1,5 +1,9 @@
+import { useTranslation } from 'next-i18next';
+
 function Home() {
-  return <main className="text-4xl">haru green</main>;
+  const { t } = useTranslation();
+
+  return <main className="text-4xl">{t('title')}</main>;
 }
 
 export default Home;
