@@ -1,7 +1,7 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslations } from 'next-intl';
 
 function Home() {
-  const { t } = useTranslation();
+  const t = useTranslations('Index');
 
   return <main className="text-4xl">{t('title')}</main>;
 }
