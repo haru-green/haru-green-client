@@ -1,5 +1,6 @@
 const colors = {
   green: '#34AA70',
+  white: '#FFFFFF',
   score: {
     zero: '#000000',
     one: '#F15252',
@@ -11,7 +12,10 @@ const colors = {
 module.exports = {
   content: ['./src/app/**/*.tsx'],
   theme: {
-    colors
+    colors,
+    fontFamily: {
+      jalnan: ['var(--font-jalnan)'],
+    }
   },
   plugins: [],
 }

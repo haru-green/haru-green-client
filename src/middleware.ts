@@ -5,7 +5,7 @@ export default createMiddleware({
   defaultLocale: 'ko',
 
   // A list of all locales that are supported
-  locales: ['ko', 'en'],
+  locales: ['ko', 'en', 'ja', 'zh'],
 });
 
 export const config = {

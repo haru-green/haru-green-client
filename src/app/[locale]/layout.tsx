@@ -1,3 +1,5 @@
+import '../../styles/globals.css';
+
 import { notFound } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { ReactNode } from 'react';
@@ -18,7 +20,12 @@ export default function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body>{children}</body>
+      <body
+        className="flex flex-col items-center m-auto"
+        style={{ height: '100dvh', maxWidth: '500px' }}
+      >
+        {children}
+      </body>
     </html>
   );
 }
